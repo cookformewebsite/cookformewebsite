@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .buttonBase {
+    @apply bg-yellow-500 hover:bg-yellow-300  px-5 py-2 cursor-pointer shadow-md text-white text-center;
+  }
+}

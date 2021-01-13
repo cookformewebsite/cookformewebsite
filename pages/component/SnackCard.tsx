@@ -11,7 +11,7 @@ function SnackCard({ snack }: { snack?: Menu }) {
   return (
     <div>
       {snack ? (
-        <div className="bg-white flex flex-col w-44 sm:w-64 shadow-lg h-auto flex-none">
+        <div className="bg-white flex flex-col w-52 sm:w-64 shadow-lg h-auto flex-none">
           <Image
             className="object-cover"
             src={snack.backgroundImage.backgroundImage}
@@ -21,10 +21,10 @@ function SnackCard({ snack }: { snack?: Menu }) {
           />
           <div className="flex-1 p-2">
             <div className="flex w-full justify-between items-center font-bold">
-              <p>{snack.title}</p>
-              <p>{snack.price} CAD</p>
+              <p className="text-sm">{snack.title}</p>
+              <p className="text-sm">{snack.price} CAD</p>
             </div>
-            <p>{snack.description}</p>
+            <p className="text-xs">{snack.description}</p>
           </div>
           {!auth?.user ? (
             <div

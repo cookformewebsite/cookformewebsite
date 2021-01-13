@@ -20,7 +20,7 @@ function ScrollXButton({
 
             scrollAmount += 10;
 
-            if (scrollAmount >= 400) {
+            if (scrollAmount >= 100) {
               window.clearInterval(slideTimer);
             }
           }

@@ -10,6 +10,8 @@ function PayPalIntegration({ paid, setPaid, time }) {
   const card = useCard();
   const [loading, setLoading] = useState(false);
   const [emailStatus, setEmailStatus] = useState(false);
+  const [items, setItems] = useState([false]);
+
   const invoiceRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => invoiceRef.current,
@@ -19,10 +21,10 @@ function PayPalIntegration({ paid, setPaid, time }) {
      */
   }
   const [error, setError] = useState(null);
-  let items = [];
   let description = "";
 
   useEffect(() => {
+    let temporaryItemsList = [];
     if (card) {
       for (let i = 0; i < card.card.menu.length; i++) {
         description = description.concat(
@@ -35,13 +37,15 @@ function PayPalIntegration({ paid, setPaid, time }) {
         );
         if (card.card.menu[i].type == "menu") {
           description = description.concat(
-            priceByPackage(card.card.menu[i], card.card.menu[i].package) *
-              card.card.menu[i].quantity +
-              " CAD"
+            (
+              priceByPackage(card.card.menu[i], card.card.menu[i].package) *
+              card.card.menu[i].quantity
+            ).toFixed(2) + " CAD"
           );
         } else {
           description = description.concat(
-            card.card.menu[i].price * card.card.menu[i].quantity + " CAD"
+            (card.card.menu[i].price * card.card.menu[i].quantity).toFixed(2) +
+              " CAD"
           );
         }
         if (i === card.card.menu.length - 1) {
@@ -49,7 +53,7 @@ function PayPalIntegration({ paid, setPaid, time }) {
         } else {
           description = description.concat(", ");
         }
-        items.push({
+        temporaryItemsList.push({
           unit_amount: {
             currency_code: "CAD",
             value:
@@ -61,6 +65,7 @@ function PayPalIntegration({ paid, setPaid, time }) {
           name: card.card.menu[i].title,
         });
       }
+      setItems(temporaryItemsList);
     }
   }, [card?.card.total]);
 
@@ -128,6 +133,7 @@ function PayPalIntegration({ paid, setPaid, time }) {
           onError={(err) => {
             setError(err), console.error(err);
           }}
+          onCancel={(data) => setLoading(false)}
         />
       ) : null}
       {paid && Object.entries(paid).length > 0 ? (
@@ -137,7 +143,7 @@ function PayPalIntegration({ paid, setPaid, time }) {
             Download your invoice
           </div>
           <div className="hidden">
-            <Bill ref={invoiceRef} data={card?.card} />
+            <Bill ref={invoiceRef} data={card?.card} date={time} />
           </div>
         </div>
       ) : null}

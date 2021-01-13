@@ -17,11 +17,12 @@ function Checkout() {
       day = (d.getDate() + 1).toString(),
       year = d.getFullYear(),
       hour = d.getHours().toString(),
-      min = d.getMinutes();
+      min = d.getMinutes().toString();
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
     if (hour.length < 2) hour = "0" + hour;
+    if (min.length < 2) min = "0" + min;
     return [year, month, day].join("-") + "T" + hour + ":" + min;
   }
 

@@ -51,21 +51,23 @@ function CheckoutCardMenu({ page, menu }: { page: string; menu?: Menu }) {
 
           <div className="p-2 space-y-2">
             {menu.type === "menu" ? (
-              <div className="flex flex-wrap  items-center">
-                <div className="font-bold mr-6">Package</div>
-                {page == "PRINT_PAGE" ? (
-                  <PackageButton menu={menu} text={menu.package} />
-                ) : (
-                  <>
-                    <PackageButton menu={menu} text="Family size" />
-                    <PackageButton menu={menu} text="Party size" />
-                    <PackageButton menu={menu} text="Mix dish" />
-                  </>
-                )}
+              <div className="flex flex-col sm:flex-row  items-start  sm:items-center  justify-start">
+                <div className="font-bold mr-6 pb-2">Package</div>
+                <div className="flex flex-wrap">
+                  {page == "PRINT_PAGE" ? (
+                    <PackageButton menu={menu} text={menu.package} />
+                  ) : (
+                    <>
+                      <PackageButton menu={menu} text="Family size" />
+                      <PackageButton menu={menu} text="Party size" />
+                      <PackageButton menu={menu} text="Mix dish" />
+                    </>
+                  )}
+                </div>
               </div>
             ) : null}
-            <div className="flex flex-wrap  items-center">
-              <div className="font-bold mr-5">Quantity</div>
+            <div className="flex flex-col sm:flex-row  items-start  sm:items-center  justify-start">
+              <div className="font-bold mr-5 pb-2">Quantity</div>
               {page == "PRINT_PAGE" ? (
                 menu.quantity
               ) : (

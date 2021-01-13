@@ -11,25 +11,6 @@ function AddquantityAndPackage({ menu }: { menu: Menu }) {
         onClick={() => {
           if (
             card &&
-            !(card?.card.menu.filter((e) => e.id === menu.id).length > 0)
-          ) {
-            menu.quantity = menu.quantity += 1;
-          }
-
-          card?.dispatchCard({
-            type: "ADD_QUANTITY",
-            payload: { id: menu.id },
-          });
-        }}
-        className="hover:bg-yellow-300 px-5 py-2 cursor-pointer shadow-md text-center font-black focus:outline-none"
-      >
-        +
-      </button>
-      {menu?.quantity}
-      <button
-        onClick={() => {
-          if (
-            card &&
             !(card?.card.menu.filter((e) => e.id === menu.id).length > 0) &&
             menu.quantity > 1
           ) {
@@ -44,6 +25,25 @@ function AddquantityAndPackage({ menu }: { menu: Menu }) {
         className="hover:bg-yellow-300 px-5 py-2 cursor-pointer shadow-md text-center font-black focus:outline-none"
       >
         -
+      </button>
+      {menu?.quantity}{" "}
+      <button
+        onClick={() => {
+          if (
+            card &&
+            !(card?.card.menu.filter((e) => e.id === menu.id).length > 0)
+          ) {
+            menu.quantity = menu.quantity += 1;
+          }
+
+          card?.dispatchCard({
+            type: "ADD_QUANTITY",
+            payload: { id: menu.id },
+          });
+        }}
+        className="hover:bg-yellow-300 px-5 py-2 cursor-pointer shadow-md text-center font-black focus:outline-none"
+      >
+        +
       </button>
     </div>
   );

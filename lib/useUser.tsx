@@ -80,11 +80,18 @@ export function ProvideAuth({ children }: any) {
     switch (action.type) {
       case "ADD_MENU":
         if (action.payload && action.payload.menu) {
-          return {
-            ...state,
-            menu: [...state.menu, action.payload.menu],
-            total: menuTotal([...state.menu, action.payload.menu]),
-          };
+          if (
+            !(
+              state.menu.filter((e) => e.id === action.payload.menu?.id)
+                .length > 0
+            )
+          ) {
+            return {
+              ...state,
+              menu: [...state.menu, action.payload.menu],
+              total: menuTotal([...state.menu, action.payload.menu]),
+            };
+          }
         }
 
       case "REMOVE_MENU":

@@ -10,6 +10,7 @@ interface ICard {
 
 interface ICardProps {
   data?: ICard;
+  date?: string;
 }
 
 interface ICardState {}
@@ -39,7 +40,7 @@ class Bill extends PureComponent<ICardProps, ICardState> {
                 <div className="flex flex-col gap-5">
                   <div>
                     <h2 className="font-bold">Date</h2>
-                    <p>12/01/201</p>
+                    <p>{this.props.date}</p>
                   </div>
                   <div>
                     <h2 className="font-bold">Phone number</h2>

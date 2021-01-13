@@ -49,7 +49,7 @@ async function sendMail(body) {
     }
     const clientMailOptions = {
       from: "cookformewebsite@gmail.com",
-      to: "kabwiziserge@gmail.com",
+      to: "taibalogun23@gmail.com",
       subject: "Your order has been received",
       generateTextFromHTML: true,
       html: `<h1>Order derscription</h1></br>

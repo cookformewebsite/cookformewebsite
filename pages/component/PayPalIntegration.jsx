@@ -8,7 +8,7 @@ import { priceByPackage } from "../../lib/useUser";
 function PayPalIntegration({ paid, setPaid, time }) {
   const card = useCard();
   const [emailStatus, setEmailStatus] = useState(false);
-  const [items, setItems] = useState([false]);
+  const [items, setItems] = useState([]);
 
   const invoiceRef = useRef(null);
   const handlePrint = useReactToPrint({

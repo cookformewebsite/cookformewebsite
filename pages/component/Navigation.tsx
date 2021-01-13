@@ -45,7 +45,7 @@ function Navigation() {
           <div
             className="relative cursor-pointer"
             onClick={() => {
-              if (card && card.card.menu.length > 0) {
+              if (card) {
                 card.dispatchCard({ type: "SHOW_DIALOG", payload: {} });
               }
             }}

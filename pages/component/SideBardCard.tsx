@@ -10,8 +10,8 @@ function SideBardCard() {
   const card = useCard();
 
   return card?.card.showSideBar ? (
-    <div className="bg-black fixed flex justify-end  bg-opacity-60 inset-0 z-10">
-      <div className="bg-white flex flex-col space-y-4 p-2 sm:p-5 overflow-scroll w-11/12  md:w-2/3 lg:w-1/2 shadow-2xl">
+    <div className="bg-black fixed flex justify-end  bg-opacity-60 inset-0 z-10 ">
+      <div className="bg-white mt-12 flex flex-col space-y-4 p-2 sm:p-5 overflow-scroll w-11/12  md:w-2/3 lg:w-1/2 shadow-2xl">
         <div className="flex justify-end">
           <Image
             onClick={() =>

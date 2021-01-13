@@ -9,7 +9,7 @@ function Navigation() {
   const card = useCard();
 
   return (
-    <div className="fixed w-screen pl-5 pr-10 sm:px-16 bg-white flex justify-between items-center shadow-md z-10 ">
+    <div className="fixed w-screen pl-5 pr-10 sm:px-16 bg-white flex justify-between items-center shadow-md z-20 ">
       <Link
         href={
           auth?.user

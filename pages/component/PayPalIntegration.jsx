@@ -4,11 +4,9 @@ import Bill from "./Bill";
 import { useReactToPrint } from "react-to-print";
 import { PayPalButton } from "react-paypal-button-v2";
 import { priceByPackage } from "../../lib/useUser";
-import Loading from "./Loading";
 
 function PayPalIntegration({ paid, setPaid, time }) {
   const card = useCard();
-  const [loading, setLoading] = useState(false);
   const [emailStatus, setEmailStatus] = useState(false);
   const [items, setItems] = useState([false]);
 
@@ -70,13 +68,12 @@ function PayPalIntegration({ paid, setPaid, time }) {
   }, [card?.card.total]);
 
   return (
-    <div>
+    <div className="z-10">
       {card.card.menu.length > 0 &&
       paid &&
       !(Object.entries(paid).length > 0) ? (
         <PayPalButton
           createOrder={(data, actions) => {
-            setLoading(true);
             return actions.order.create({
               intent: "CAPTURE",
               purchase_units: [
@@ -103,7 +100,6 @@ function PayPalIntegration({ paid, setPaid, time }) {
             const order = await actions.order.capture();
             // Show a success message to the buyer
             setPaid(order);
-            setLoading(false);
             fetch("https://cookformewebsite.vercel.app/api/sendEmail", {
               method: "post",
               body: JSON.stringify({
@@ -133,7 +129,6 @@ function PayPalIntegration({ paid, setPaid, time }) {
           onError={(err) => {
             setError(err), console.error(err);
           }}
-          onCancel={(data) => setLoading(false)}
         />
       ) : null}
       {paid && Object.entries(paid).length > 0 ? (
@@ -157,7 +152,6 @@ function PayPalIntegration({ paid, setPaid, time }) {
           <div className="font-semibold"> {paid.payer.email_address}</div>
         </div>
       ) : null}
-      {loading ? <Loading /> : null}
     </div>
   );
 }

@@ -44,7 +44,7 @@ function SideBardCard() {
         <div
           onClick={() => {
             card.dispatchCard({ type: "HIDDE_DIALOG", payload: {} });
-            router.push("http://localhost:3000/Checkout");
+            router.push("https://cookformewebsite.vercel.app/Checkout");
           }}
           className="buttonBase text-2xl font-bold py-3"
         >

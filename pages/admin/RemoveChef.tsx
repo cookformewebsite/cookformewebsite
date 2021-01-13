@@ -11,7 +11,7 @@ function RemoveChef() {
 
   useEffect(() => {
     if (!auth?.user) {
-      rout.push("http://localhost:3000/admin");
+      rout.push("https://cookformewebsite.vercel.app/admin");
     }
   }, [auth]);
 

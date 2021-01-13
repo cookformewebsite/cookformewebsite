@@ -62,11 +62,6 @@ function PayPalIntegration({ paid, setPaid, time }) {
         });
       }
     }
-    console.log({
-      total: card?.card.total,
-      items: items,
-      description: description,
-    });
   }, [card?.card.total]);
 
   return (
@@ -104,7 +99,7 @@ function PayPalIntegration({ paid, setPaid, time }) {
             // Show a success message to the buyer
             setPaid(order);
             setLoading(false);
-            fetch("http://localhost:3000/api/sendEmail", {
+            fetch("https://cookformewebsite.vercel.app/api/sendEmail", {
               method: "post",
               body: JSON.stringify({
                 time: time,
@@ -129,8 +124,6 @@ function PayPalIntegration({ paid, setPaid, time }) {
               setEmailStatus(response);
               return response;
             });
-
-            console.log(order);
           }}
           onError={(err) => {
             setError(err), console.error(err);

@@ -4,7 +4,6 @@ import { google } from "googleapis";
 export default async (req, res) => {
   sendMail(req.body)
     .then((result) => {
-      console.log("email envoyé");
       res.end();
     })
     .catch((error) => {

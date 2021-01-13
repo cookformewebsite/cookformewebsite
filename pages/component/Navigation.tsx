@@ -12,7 +12,9 @@ function Navigation() {
     <div className="fixed w-screen pl-5 pr-10 sm:px-16 bg-white flex justify-between items-center shadow-md z-10 ">
       <Link
         href={
-          auth?.user ? "http://localhost:3000/admin" : "http://localhost:3000/"
+          auth?.user
+            ? "https://cookformewebsite.vercel.app/admin"
+            : "https://cookformewebsite.vercel.app/"
         }
       >
         <a>

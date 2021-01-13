@@ -25,8 +25,6 @@ function Checkout() {
     return [year, month, day].join("-") + "T" + hour + ":" + min;
   }
 
-  console.log(time);
-
   return (
     <>
       <Navigation />
@@ -45,9 +43,9 @@ function Checkout() {
                       id="time"
                       name="time"
                       value={time}
-                      min={time}
+                      min={formatDate(Date.now())}
                       onChange={(e) => {
-                        console.log(e.target.value);
+                        setTime(e.target.value);
                       }}
                     ></input>
                   </div>

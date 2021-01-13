@@ -8,7 +8,6 @@ import { priceByPackage } from "../../lib/useUser";
 
 function CheckoutCardMenu({ page, menu }: { page: string; menu?: Menu }) {
   const card = useCard();
-  console.log("////////", card);
 
   return (
     <>

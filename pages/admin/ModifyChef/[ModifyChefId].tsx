@@ -41,7 +41,7 @@ function ModifyChef({ chefId }: { chefId: string }) {
   useEffect(() => {
     const interval = setInterval(() => {
       if (!auth?.user) {
-        rout.push("http://localhost:3000/admin");
+        rout.push("https://cookformewebsite.vercel.app/admin");
       }
     }, 2000);
     return () => clearInterval(interval);

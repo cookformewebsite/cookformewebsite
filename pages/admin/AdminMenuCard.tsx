@@ -12,7 +12,6 @@ function AdminMenuCard({
   menu: IMenu;
   menuList: IMenu[];
 }) {
-  console.log(menu?.backgroundImage);
 
   return (
     <div key={menu?.id} className="flex-col shadow overflow-hidden">

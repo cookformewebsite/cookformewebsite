@@ -16,6 +16,17 @@ export interface IbackgroundImageFromFirestore {
   filePathToFirestore: string;
 }
 
+export interface IMenuCard {
+  id?: string;
+  title: string;
+  description: string;
+  price: any | number;
+  type: string;
+  backgroundImage: IbackgroundImageFromFirestore;
+  quantity: number;
+  package: string;
+}
+
 export interface IMenu {
   id?: string;
   title: string;

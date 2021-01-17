@@ -1,8 +1,8 @@
 import React from "react";
-import Menu from "../../class/MenuClass";
+import Menu, { IMenuCard } from "../../class/MenuClass";
 import { useCard } from "../../lib/useUser";
 
-function AddquantityAndPackage({ menu }: { menu: Menu }) {
+function AddquantityAndPackage({ menu }: { menu: IMenuCard }) {
   const card = useCard();
 
   return (
@@ -26,7 +26,7 @@ function AddquantityAndPackage({ menu }: { menu: Menu }) {
       >
         -
       </button>
-      {menu?.quantity}{" "}
+      {menu?.quantity}
       <button
         onClick={() => {
           if (

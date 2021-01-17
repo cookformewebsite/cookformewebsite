@@ -8,17 +8,17 @@ import {
 } from "react";
 import "firebase/auth";
 import firebase from "./initFirebase";
-import Menu from "../class/MenuClass";
+import Menu, { IMenuCard } from "../class/MenuClass";
 import User from "../class/UserClass";
 
 interface ICard {
   showSideBar: boolean;
-  menu: Array<Menu>;
+  menu: Array<IMenuCard>;
   total: string;
 }
 interface IPayload {
   id?: string;
-  menu?: Menu;
+  menu?: IMenuCard;
 }
 
 interface IAction {
@@ -39,7 +39,7 @@ const cardContext = createContext<{
   dispatchCard: Dispatch<IAction>;
 } | null>(null);
 
-export function priceByPackage(menu: Menu, menuPackage: string) {
+export function priceByPackage(menu: IMenuCard, menuPackage: string) {
   switch (menuPackage) {
     case "Family size":
       return menu.price.familySize;
@@ -52,7 +52,8 @@ export function priceByPackage(menu: Menu, menuPackage: string) {
   }
 }
 
-function menuTotal(menu: Array<Menu>) {
+function menuTotal(menu: Array<IMenuCard>) {
+  console.log(menu);
   let total: number = 0;
   for (let i = 0; i < menu.length; i++) {
     let multiplyPriceByQuantity: number;
@@ -77,6 +78,7 @@ function menuTotal(menu: Array<Menu>) {
 // ... available to any child component that calls useAuth().
 export function ProvideAuth({ children }: any) {
   function reducer(state: ICard, action: IAction) {
+    console.log(action);
     switch (action.type) {
       case "ADD_MENU":
         if (action.payload && action.payload.menu) {
@@ -104,32 +106,96 @@ export function ProvideAuth({ children }: any) {
           total: menuTotal(removeValue),
         };
       case "ADD_QUANTITY":
-        const newValueAdd = state.menu.map((e) => {
-          if (e.id === action.payload.id) {
-            e.quantity = e.quantity += 1;
-            return e;
-          } else {
-            return e;
-          }
-        });
-        return { ...state, menu: newValueAdd, total: menuTotal(newValueAdd) };
-      case "REDUCE_QUANTITY":
-        const newValueReduce = state.menu.map((e) => {
-          if (e.id === action.payload.id) {
-            if (e.quantity > 1) {
-              e.quantity = e.quantity -= 1;
-            }
-            return e;
-          } else {
-            return e;
-          }
-        });
         return {
           ...state,
-          menu: newValueReduce,
-          total: menuTotal(newValueReduce),
+          menu: state.menu.map((e) =>
+            e.id === action.payload.id
+              ? {
+                  id: e.id,
+                  title: e.title,
+                  description: e.description,
+                  price: e.price,
+                  type: e.type,
+                  quantity: e.quantity + 1,
+                  package: e.package,
+                  backgroundImage: {
+                    backgroundImage: e.backgroundImage.backgroundImage,
+                    filePathToFirestore: e.backgroundImage.filePathToFirestore,
+                  },
+                  documentReference: null,
+                }
+              : e
+          ),
+          total: menuTotal(
+            state.menu.map((e) =>
+              e.id === action.payload.id
+                ? {
+                    id: e.id,
+                    title: e.title,
+                    description: e.description,
+                    price: e.price,
+                    type: e.type,
+                    quantity: e.quantity + 1,
+                    package: e.package,
+                    backgroundImage: {
+                      backgroundImage: e.backgroundImage.backgroundImage,
+                      filePathToFirestore:
+                        e.backgroundImage.filePathToFirestore,
+                    },
+                    documentReference: null,
+                  }
+                : e
+            )
+          ),
         };
-
+      case "REDUCE_QUANTITY":
+        return {
+          ...state,
+          menu: state.menu.map((e) =>
+            e.id === action.payload.id
+              ? e.quantity > 1
+                ? {
+                    id: e.id,
+                    title: e.title,
+                    description: e.description,
+                    price: e.price,
+                    type: e.type,
+                    quantity: e.quantity - 1,
+                    package: e.package,
+                    backgroundImage: {
+                      backgroundImage: e.backgroundImage.backgroundImage,
+                      filePathToFirestore:
+                        e.backgroundImage.filePathToFirestore,
+                    },
+                    documentReference: null,
+                  }
+                : e
+              : e
+          ),
+          total: menuTotal(
+            state.menu.map((e) =>
+              e.id === action.payload.id
+                ? e.quantity > 1
+                  ? {
+                      id: e.id,
+                      title: e.title,
+                      description: e.description,
+                      price: e.price,
+                      type: e.type,
+                      quantity: e.quantity - 1,
+                      package: e.package,
+                      backgroundImage: {
+                        backgroundImage: e.backgroundImage.backgroundImage,
+                        filePathToFirestore:
+                          e.backgroundImage.filePathToFirestore,
+                      },
+                      documentReference: null,
+                    }
+                  : e
+                : e
+            )
+          ),
+        };
       case "CHANGE_PACKAGE":
         if (action.payload && action.payload.menu) {
           const newPackage = state.menu.map((e) => {

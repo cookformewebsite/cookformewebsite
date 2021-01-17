@@ -1,8 +1,8 @@
 import React from "react";
 import { useCard } from "../../lib/useUser";
-import Menu from "../../class/MenuClass";
+import Menu, { IMenuCard } from "../../class/MenuClass";
 
-function PackageButton({ menu, text }: { menu?: Menu; text?: string }) {
+function PackageButton({ menu, text }: { menu?: IMenuCard; text?: string }) {
   const card = useCard();
 
   return (

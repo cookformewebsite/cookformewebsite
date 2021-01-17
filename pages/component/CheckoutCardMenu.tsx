@@ -3,10 +3,10 @@ import Image from "next/image";
 import PackageButton from "../component/PackageButton";
 import AddQuantity from "../component/AddQuantity";
 import { useCard } from "../../lib/useUser";
-import Menu from "../../class/MenuClass";
+import Menu, { IMenuCard } from "../../class/MenuClass";
 import { priceByPackage } from "../../lib/useUser";
 
-function CheckoutCardMenu({ page, menu }: { page: string; menu?: Menu }) {
+function CheckoutCardMenu({ page, menu }: { page: string; menu?: IMenuCard }) {
   const card = useCard();
 
   return (

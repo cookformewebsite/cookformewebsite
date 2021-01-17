@@ -15,8 +15,8 @@ function Navigation() {
       <Link
         href={
           auth?.user
-            ? "https://cookformewebsite.vercel.app/admin"
-            : "https://cookformewebsite.vercel.app/"
+            ? "https://mymealplans.ca/admin"
+            : "https://mymealplans.ca/"
         }
       >
         <a>
@@ -49,7 +49,7 @@ function Navigation() {
               className="hover:text-yellow-500 cursor-pointer"
               onClick={() => {
                 card?.dispatchCard({ type: "HIDDE_DIALOG", payload: {} });
-                router.push("https://cookformewebsite.vercel.app/Checkout");
+                router.push("https://mymealplans.ca/Checkout");
               }}
             >
               Checkout

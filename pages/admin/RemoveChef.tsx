@@ -11,7 +11,7 @@ function RemoveChef() {
 
   useEffect(() => {
     if (!auth?.user) {
-      rout.push("https://cookformewebsite.vercel.app/admin");
+      rout.push("https://mymealplans.ca/admin");
     }
   }, [auth]);
 

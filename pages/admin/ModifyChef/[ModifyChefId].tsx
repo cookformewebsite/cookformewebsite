@@ -41,7 +41,7 @@ function ModifyChef({ chefId }: { chefId: string }) {
   useEffect(() => {
     const interval = setInterval(() => {
       if (!auth?.user) {
-        rout.push("https://cookformewebsite.vercel.app/admin");
+        rout.push("https://mymealplans.ca/admin");
       }
     }, 2000);
     return () => clearInterval(interval);

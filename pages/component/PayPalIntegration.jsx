@@ -100,7 +100,7 @@ function PayPalIntegration({ paid, setPaid, time }) {
             const order = await actions.order.capture();
             // Show a success message to the buyer
             setPaid(order);
-            fetch("https://cookformewebsite.vercel.app/api/sendEmail", {
+            fetch("https://mymealplans.ca/api/sendEmail", {
               method: "post",
               body: JSON.stringify({
                 time: time,

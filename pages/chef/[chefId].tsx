@@ -66,7 +66,7 @@ function ChefPage({ chef }: { chef: Chef }) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { chefId } = context.query;
   const response = await fetch(
-    "https://cookformewebsite.vercel.app/api/getChefsAndMenus?id=" + chefId
+    "https://mymealplans.ca/api/getChefsAndMenus?id=" + chefId
   );
   const Chef: Chef = await response.json();
 
